@@ -606,9 +606,9 @@ static void forward_endac4_in(struct xdp_plane *plane, unsigned int port_idx,
 		check += htons(0x0100);
 		ip->check = check + ((check >= 0xFFFF) ? 1 : 0);
 
-		sr_arg = ~ip->tos;
+		sr_arg = ip->tos;
 
-		sr_cache = &sr_table->cache4[sr_arg];
+		sr_cache = &sr_table->cache4[~sr_arg];
 		pthread_rwlock_rdlock(&sr_cache->lock);
 		cache_len = sr_cache->size;
 
