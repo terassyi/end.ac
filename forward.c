@@ -800,7 +800,7 @@ static void forward_endac4_out(struct xdp_plane *plane, unsigned int port_idx,
 		pkt->current = ip + 1;
 
 		ip->check = xdp_ip_check_inc(ip->check, ip->tos, sr_arg);
-		ip->tos = sr_arg;
+		ip->tos = ~sr_arg;
 
 		eth = (struct ethhdr *)pkt->layer2;
 		memcpy(eth->h_dest, port->bound_mac_addr, ETH_ALEN);
